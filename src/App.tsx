@@ -3,6 +3,7 @@ import { LandingPage } from './pages/LandingPage'
 import { StudioLandingPage } from './pages/StudioLandingPage'
 import { DashboardPage } from './pages/DashboardPage'
 import { MapPage } from './pages/MapPage'
+import { SpotifyCallbackPage } from './pages/SpotifyCallbackPage'
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
         <Route index element={<LandingPage />} />
         <Route path="studio" element={<StudioLandingPage />} />
         <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="dashboard/spotify/callback" element={<SpotifyCallbackPage />} />
         <Route path="peta" element={<MapPage />} />
       </Routes>
     </BrowserRouter>

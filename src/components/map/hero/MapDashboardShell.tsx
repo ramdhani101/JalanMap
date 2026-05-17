@@ -6,6 +6,11 @@ import type { MapFeatureAction } from '../../../data/mapHeroMenu'
 import { MapHeroNav } from './MapHeroNav'
 import { MapHeroHeader } from './MapHeroHeader'
 import { MapHeroSearchBox } from './MapHeroSearchBox'
+import {
+  SpotifyDashboardButton,
+  SpotifyDashboardPanel,
+  SpotifyDashboardRoot,
+} from '../../spotify/SpotifyDashboardSection'
 import type { LocationPin, SearchFocus } from '../../../types'
 import './map-hero.css'
 
@@ -68,25 +73,31 @@ export function MapDashboardShell({
             />
           )}
           {isSearchOnly && (
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              {onOpenMap && (
-                <button
-                  type="button"
-                  onClick={onOpenMap}
-                  className="font-schibsted flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-5 py-2.5 text-sm font-medium text-[#000000] shadow-sm backdrop-blur-sm transition-transform hover:scale-105"
-                >
-                  <Map className="h-4 w-4" />
-                  Peta
-                </button>
-              )}
-              <Link
-                to="/studio"
-                className="font-schibsted flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-5 py-2.5 text-sm font-medium text-[#000000] shadow-sm backdrop-blur-sm transition-transform hover:scale-105"
-              >
-                <BookOpen className="h-4 w-4" />
-                Travel Jurnal
-              </Link>
-            </div>
+            <SpotifyDashboardRoot>
+              <div className="flex w-full max-w-xl flex-col items-center gap-4">
+                <SpotifyDashboardPanel />
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  {onOpenMap && (
+                    <button
+                      type="button"
+                      onClick={onOpenMap}
+                      className="font-schibsted flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-5 py-2.5 text-sm font-medium text-[#000000] shadow-sm backdrop-blur-sm transition-transform hover:scale-105"
+                    >
+                      <Map className="h-4 w-4" />
+                      Peta
+                    </button>
+                  )}
+                  <Link
+                    to="/studio"
+                    className="font-schibsted flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-5 py-2.5 text-sm font-medium text-[#000000] shadow-sm backdrop-blur-sm transition-transform hover:scale-105"
+                  >
+                    <BookOpen className="h-4 w-4" />
+                    Travel Jurnal
+                  </Link>
+                  <SpotifyDashboardButton />
+                </div>
+              </div>
+            </SpotifyDashboardRoot>
           )}
         </div>
 

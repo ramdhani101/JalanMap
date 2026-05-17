@@ -1,5 +1,6 @@
 import type { ComponentProps } from 'react'
 import { Link } from 'react-router-dom'
+import { LandingMusic } from '../components/landing/LandingMusic'
 import { Button } from '../components/ui/button'
 import { cn } from '../lib/utils'
 
@@ -43,16 +44,18 @@ export function LandingPage() {
         <source src={VIDEO_SRC} type="video/mp4" />
       </video>
 
-      <header className="relative z-10 mx-auto flex max-w-7xl flex-row items-center justify-between px-8 py-6">
+      <header className="relative z-10 mx-auto flex min-h-14 max-w-7xl items-center justify-center px-8 py-6">
         <Link
           to="/"
-          className="text-3xl tracking-tight text-foreground"
+          className="absolute left-8 top-1/2 -translate-y-1/2 text-3xl tracking-tight text-foreground"
           style={displayFont}
         >
           JalanMap<sup className="text-xs align-super">®</sup>
         </Link>
 
-        <div className="ml-auto flex items-center gap-3">
+        <LandingMusic />
+
+        <div className="absolute right-8 top-1/2 flex -translate-y-1/2 items-center gap-3">
           <LiquidGlassButton size="nav" asChild>
             <Link to="/dashboard">Daftar</Link>
           </LiquidGlassButton>
