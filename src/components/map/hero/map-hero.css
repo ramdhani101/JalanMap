@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap');
+
+.map-hero-root {
+  --map-black: #000000;
+  --map-gray: #505050;
+  --map-light-gray: #f8f8f8;
+  --map-green: rgba(90, 225, 76, 0.89);
+  --map-badge-dark: #0e1311;
+  --map-glass: rgba(255, 255, 255, 0.52);
+  --map-glass-border: rgba(255, 255, 255, 0.75);
+
+  font-family: 'Inter', 'Noto Sans', sans-serif;
+  color: var(--map-black);
+}
+
+.map-hero-root .font-schibsted {
+  font-family: 'Schibsted Grotesk', sans-serif;
+}
+
+.map-hero-root .font-fustat {
+  font-family: 'Fustat', sans-serif;
+}
+
+/* Kotak pencarian — glass elegan seperti referensi */
+.map-hero-glass-panel {
+  background: var(--map-glass);
+  border: 1px solid var(--map-glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.map-hero-glass-panel__header {
+  background: rgba(0, 0, 0, 0.32);
+  border-radius: 10px;
+  color: #ffffff;
+}
+
+.map-hero-search-input-wrap {
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Hasil dropdown — teks gelap agar terbaca (hindari inherit putih dari body) */
+.map-hero-search-results {
+  color: var(--map-black) !important;
+}
+
+.map-hero-search-results button {
+  color: var(--map-black) !important;
+}
+
+.map-hero-search-results .text-muted {
+  color: var(--map-gray) !important;
+}
+
+.map-hero-map-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}

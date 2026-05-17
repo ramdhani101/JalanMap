@@ -25,6 +25,8 @@ export interface LocationPin {
   priceRange?: string
   services?: string[]
   eventNote?: string
+  /** Spot dengan kunjungan relatif rendah / belum mainstream */
+  hiddenGem?: boolean
   createdAt: string
 }
 
@@ -105,4 +107,19 @@ export interface RouteResult {
   durationSeconds: number
   geometry: [number, number][]
   steps: RouteStep[]
+}
+
+export type JournalMediaType = 'photo' | 'video' | 'note'
+
+export interface TravelJournalEntry {
+  id: string
+  type: JournalMediaType
+  title: string
+  caption: string
+  location?: string
+  createdAt: string
+  /** URL gambar (remote atau data URL dari upload) */
+  photoUrl?: string
+  /** URL video (YouTube, CloudFront, dll.) */
+  videoUrl?: string
 }

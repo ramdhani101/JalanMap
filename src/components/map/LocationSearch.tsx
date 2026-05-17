@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { Globe, Loader2, MapPin, Search } from 'lucide-react'
+import { Globe, Loader2, MapPin, Mic, Search } from 'lucide-react'
 import { usePlaceSearch } from '../../hooks/usePlaceSearch'
+import { useVoiceSearch } from '../../hooks/useVoiceSearch'
+import { cn } from '../../lib/utils'
 import { CATEGORY_CONFIG } from '../../lib/categories'
 import type { LocationPin, PlaceResult, SearchFocus } from '../../types'
 
@@ -35,6 +37,13 @@ export function LocationSearch({
   const [highlight, setHighlight] = useState(0)
 
   const { results: places, loading, error } = usePlaceSearch(pinFilter)
+
+  const voice = useVoiceSearch({
+    onTranscript: (text) => {
+      onPinFilterChange(text)
+      setOpen(true)
+    },
+  })
 
   const matchingPins = pinFilter.trim()
     ? pins
@@ -107,6 +116,22 @@ export function LocationSearch({
   return (
     <div ref={wrapRef} className="relative">
       <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 pointer-events-none" />
+      <button
+        type="button"
+        onClick={voice.toggleListening}
+        disabled={!voice.isSupported}
+        title={voice.listening ? 'Berhenti' : 'Cari dengan suara'}
+        className={cn(
+          'absolute right-3 top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full transition-colors',
+          voice.listening
+            ? 'bg-red-100 text-red-600 ring-2 ring-red-300'
+            : 'bg-slate-100 text-slate-600 hover:bg-slate-200',
+          !voice.isSupported && 'hidden',
+        )}
+        aria-label="Suara"
+      >
+        <Mic className={cn('h-3.5 w-3.5', voice.listening && 'animate-pulse')} />
+      </button>
       <input
         value={pinFilter}
         onChange={(e) => {
@@ -120,17 +145,17 @@ export function LocationSearch({
         aria-expanded={showDropdown}
         aria-controls={listId}
         aria-autocomplete="list"
-        className="w-full rounded-xl border border-slate-200 py-2.5 pl-9 pr-9 text-sm outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20"
+        className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-12 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20"
       />
-      {loading && (
-        <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-cyan-500" />
+      {loading && !voice.listening && (
+        <Loader2 className="absolute right-11 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-cyan-500" />
       )}
 
       {showDropdown && (
         <ul
           id={listId}
           role="listbox"
-          className="absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 shadow-xl ring-1 ring-slate-900/5"
+          className="map-sidebar-search-results absolute left-0 right-0 top-[calc(100%+6px)] z-50 max-h-72 overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 text-slate-900 shadow-xl ring-1 ring-slate-900/5"
         >
           {error && <li className="px-3 py-2 text-xs text-rose-600">{error}</li>}
 
